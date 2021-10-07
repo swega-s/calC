@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CalC</string>
+    <string name="add">ADD</string>
+    <string name="subtract">SUBTRACT</string>
+    <string name="multiply">Multiply</string>
+    <string name="divide">DIVIDE</string>
+    <string name="reset">Reset</string>
+    <string name="digits">0123456789.</string>
+</resources>
