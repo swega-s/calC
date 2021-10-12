@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/teal_700"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:backgroundTint="#E30B1C"
+            android:text="@string/add"
+            android:layout_margin="8dp"/>
+
+        <Button
+            android:id="@+id/subButton"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:backgroundTint="#16A618"
+            android:text="@string/subtract"
+            android:layout_margin="8dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/multiplyButton"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:text="@string/multiply"
+            android:backgroundTint="#F3DC18"
+            android:layout_margin="8dp"/>
+        <Button
+            android:id="@+id/divideButton"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:text="@string/divide"
+            android:backgroundTint="#2196F3"
+            android:layout_margin="8dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/result_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/resultTextView"
+            android:layout_width="@dimen/tv_width"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_margin="8dp"
+            android:text="hello"/>
+
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:layout_margin="8dp"
+            android:text="@string/reset"/>
+
+    </LinearLayout>
+
+</LinearLayout>

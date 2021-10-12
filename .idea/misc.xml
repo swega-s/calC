@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Swega/AndroidStudioProjects/CalC/app/src/main/res/drawable/ic_back_foreground.xml" value="0.23125" />
+        <entry key="..\:/Users/Swega/AndroidStudioProjects/CalC/app/src/main/res/drawable/ic_launcher_background.xml" value="0.23125" />
+        <entry key="..\:/Users/Swega/AndroidStudioProjects/CalC/app/src/main/res/layout-land/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/Swega/AndroidStudioProjects/CalC/app/src/main/res/layout-land/fragment_input.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/Swega/AndroidStudioProjects/CalC/app/src/main/res/layout-v23/fragment_input.xml" value="0.17291666666666666" />
         <entry key="..\:/Users/Swega/AndroidStudioProjects/CalC/app/src/main/res/layout/activity_main.xml" value="0.2427536231884058" />
         <entry key="..\:/Users/Swega/AndroidStudioProjects/CalC/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Swega/AndroidStudioProjects/CalC/app/src/main/res/layout/fragment_input.xml" value="0.25416666666666665" />
