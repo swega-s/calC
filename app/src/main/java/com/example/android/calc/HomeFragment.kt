@@ -118,7 +118,7 @@ class HomeFragment : Fragment() {
 
         resultTextView.text = "Result is ${findWhole(res)}\n" +
                 "for inputs ${findWhole(inp1)} and ${findWhole(inp2)}\n" +
-                "for operation - $requestCode"
+                "for operation - $reqCode"
         flag = true
         showResultViews()
     }
