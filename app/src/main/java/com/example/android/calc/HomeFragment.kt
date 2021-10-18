@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -16,6 +17,7 @@ class HomeFragment : Fragment() {
 
     interface OnItemSelectedListener {
         fun onOperationItemSelected()
+        fun onResetSelected()
     }
 
     override fun onAttach(context: Context) {
@@ -71,6 +73,7 @@ class HomeFragment : Fragment() {
         }
         resetButton.setOnClickListener {
             viewModel.resultFlag = false
+            listener.onResetSelected()
             showOptionViews()
         }
     }

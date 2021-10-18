@@ -127,7 +127,12 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
             }
         }
         appBarTitle = viewModel.operation.toString()
-        supportActionBar?.title = viewModel.operation.toString()
+        supportActionBar?.title = appBarTitle
+    }
+
+    override fun onResetSelected() {
+        appBarTitle = getString(R.string.app_name)
+        supportActionBar?.title = appBarTitle
     }
 
     private fun showBackButton() {
