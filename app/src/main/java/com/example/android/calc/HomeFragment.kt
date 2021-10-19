@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_input.*
 
 class HomeFragment : Fragment() {
 
@@ -31,6 +32,13 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
+            (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
+//            MainActivity.inp1 = ""
+//            MainActivity.inp2 = ""
+//            if () {
+//                input1.setText("")
+//                input2.setText("")
+//            }
             if (viewModel.resultFlag) {
                 showOptionViews()
                 viewModel.resultFlag = false
@@ -98,6 +106,7 @@ class HomeFragment : Fragment() {
 
     private fun handleClick(operation: Operations) {
         viewModel.operation = operation
+        viewModel.inputFragment = InputFragment()
         listener.onOperationItemSelected()
     }
 

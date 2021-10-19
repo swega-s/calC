@@ -6,6 +6,5 @@
     <string name="divide">DIVIDE</string>
     <string name="reset">Reset</string>
     <string name="digits">0123456789.</string>
-    <string name="detail_heading">Web Page Detail</string>
-    <string name="list_heading">Web Page Listing</string>
+    <string name="op_btn_default">CLICK</string>
 </resources>

@@ -4,11 +4,18 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import androidx.fragment.app.replace
+import com.example.android.calc.Operations.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_input.*
 import java.lang.Math.floor
 
 class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
@@ -28,19 +35,16 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
 
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
-                replace(R.id.main_fragment, HomeFragment())
+                replace(R.id.main_fragment, viewModel.homeFragment)
             }
             appBarTitle = getString(R.string.app_name)
         }
 
         if (findViewById<View?>(R.id.input_fragment) != null) {
             supportFragmentManager.popBackStack()
-            val inputFragment = supportFragmentManager.findFragmentById(R.id.input_fragment)
-            if (inputFragment == null) {
                 supportFragmentManager.commit {
-                    replace(R.id.input_fragment, InputFragment())
+                    replace(R.id.input_fragment, viewModel.inputFragment)
                 }
-            }
         }
     }
 
@@ -57,9 +61,9 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
 
         if (!inMainFragment && viewModel.isPortrait) {
             supportFragmentManager.commit {
-                replace(R.id.main_fragment, HomeFragment())
+                replace(R.id.main_fragment, viewModel.homeFragment)
                 addToBackStack(null)
-                replace(R.id.main_fragment, InputFragment())
+                replace(R.id.main_fragment, viewModel.inputFragment)
             }
             showBackButton()
         }
@@ -79,9 +83,14 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
     }
 
     override fun onBackPressed() {
+
+        viewModel.operation = null
         if (supportFragmentManager.backStackEntryCount != 0) {
             appBarTitle = getString(R.string.app_name)
             supportActionBar?.title = appBarTitle
+            input1.text.clear()
+            input2.text.clear()
+            viewModel.inputFragment = InputFragment()
             supportFragmentManager.popBackStackImmediate()
             inMainFragment = true
         }
@@ -106,7 +115,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
             supportFragmentManager.popBackStackImmediate()
         } else {
             supportFragmentManager.commit {
-                replace(R.id.main_fragment, HomeFragment())
+                replace(R.id.main_fragment, viewModel.homeFragment)
             }
         }
     }
@@ -117,13 +126,13 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
         inMainFragment = false
         if (viewModel.isPortrait) {
             supportFragmentManager.commit {
-                replace(R.id.main_fragment, InputFragment())
+                replace(R.id.main_fragment, viewModel.inputFragment)
                 addToBackStack(null)
             }
         } else {
             supportFragmentManager.commit {
                 replace(R.id.main_fragment, HomeFragment())
-                replace(R.id.input_fragment, InputFragment())
+                replace(R.id.input_fragment, viewModel.inputFragment)
             }
         }
         appBarTitle = viewModel.operation.toString()
@@ -148,10 +157,11 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
         val inp1 = viewModel.data1
         val inp2 = viewModel.data2
         val res = when (viewModel.operation) {
-            Operations.ADD -> inp1 + inp2
-            Operations.SUBTRACT -> inp1 - inp2
-            Operations.MULTIPLY -> inp1 * inp2
-            Operations.DIVIDE -> inp1 / inp2
+            ADD -> inp1 + inp2
+            SUBTRACT -> inp1 - inp2
+            MULTIPLY -> inp1 * inp2
+            DIVIDE -> inp1 / inp2
+            null -> TODO()
         }
         viewModel.result = "Result is ${findWhole(res)}\n" +
                 "for inputs ${findWhole(inp1)} and ${findWhole(inp2)}\n" +
