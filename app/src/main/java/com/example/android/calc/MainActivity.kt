@@ -4,15 +4,10 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.EditText
-import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import com.example.android.calc.Operations.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_input.*
