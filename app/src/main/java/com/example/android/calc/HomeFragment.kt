@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -76,8 +77,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
 
+        Log.d(TAG, "onviewstate restored")
         if (savedInstanceState != null) {
+            Log.d(TAG, "onviewstate restored2")
             if (viewModel.resultFlag) {
+                Log.d(TAG, "onviewstate restored3")
                 resultTextView.text = savedInstanceState.getString("result")
                 showResultViews()
             }
@@ -86,14 +90,17 @@ class HomeFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        Log.d(TAG, "onviewstate restored -opp")
         if (viewModel.resultFlag) {
+            Log.d(TAG, "onviewstate restored -opp2")
             outState.putString("result", resultTextView.text.toString())
         }
         super.onSaveInstanceState(outState)
     }
 
     private fun handleClick(operation: Operations) {
-        viewModel.operation = operation
+        Log.d(TAG, operation.toString() + addButton.isVisible.toString())
+        MainActivity.operation = operation
         MainActivity.inputFragment = InputFragment()
         listener.onOperationItemSelected()
     }
@@ -108,4 +115,28 @@ class HomeFragment : Fragment() {
         resultTextView.text = viewModel.result
     }
 
+    override fun onDestroy() {
+        Log.d(TAG, "onDestroy")
+        super.onDestroy()
+    }
+
+    override fun onStop() {
+        Log.d(TAG, "onStop")
+        super.onStop()
+    }
+
+    override fun onPause() {
+        Log.d(TAG, "onPause")
+        super.onPause()
+    }
+
+    override fun onDestroyView() {
+        Log.d(TAG, "onDestroyView")
+        super.onDestroyView()
+    }
+
+    override fun onDetach() {
+        Log.d(TAG, "onDetach")
+        super.onDetach()
+    }
 }

@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
-import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.fragment.app.commit
@@ -29,6 +28,8 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
     companion object {
         var homeFragment = HomeFragment()
         var inputFragment = InputFragment()
+        var operation: Operations? = null
+        var isPortrait: Boolean = false
     }
 
     @SuppressLint("ResourceType")
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
                 replace(R.id.main_fragment, homeFragment)
             }
             appBarTitle = getString(R.string.app_name)
+            supportActionBar?.title = appBarTitle
         }
 
         if (findViewById<View?>(R.id.input_fragment) != null) {
@@ -59,7 +61,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
 
     override fun onStart() {
         Log.d(TAG, "onstart")
-        viewModel.isPortrait =
+        isPortrait =
             resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE
         super.onStart()
     }
@@ -73,7 +75,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
         supportActionBar?.title = appBarTitle
         Log.d(TAG, "restore $appBarTitle")
 
-        if (!inMainFragment && viewModel.isPortrait) {
+        if (!inMainFragment && isPortrait) {
             supportFragmentManager.commit {
                 replace(R.id.main_fragment, homeFragment)
                 addToBackStack(null)
@@ -94,18 +96,20 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
 
     override fun onBackPressed() {
         Log.d(TAG, "onBackPressed")
-        viewModel.operation = null
         if (supportFragmentManager.backStackEntryCount != 0) {
             Log.d(TAG, "hoho1")
             appBarTitle = getString(R.string.app_name)
             supportActionBar?.title = appBarTitle
             input1.text.clear()
             input2.text.clear()
+            operation = null
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            if (!isPortrait) {
+                inputFragment.setViewAndChildrenEnabled(findViewById(R.id.input_fragment), false)
+            }
             supportFragmentManager.popBackStackImmediate()
             inMainFragment = true
-        }
-        else {
+        } else {
             supportActionBar?.title = getString(R.string.app_name)
             if (viewModel.resultFlag) {
                 val view = findViewById<Button>(R.id.addButton)
@@ -139,6 +143,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
 
     override fun finish() {
         Log.d(TAG, "finish")
+        supportActionBar?.title = getString(R.string.app_name)
         super.finish()
     }
 
@@ -158,21 +163,24 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
         appBarTitle = getString(R.string.app_name)
         supportActionBar?.title = appBarTitle
         performOperationForResult()
-        viewModel.operation = null
-        if (viewModel.isPortrait) {
+        operation = null
+        if (isPortrait) {
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
             supportFragmentManager.popBackStackImmediate()
         } else {
             supportFragmentManager.commit {
-                replace(R.id.main_fragment, homeFragment)
+                replace(R.id.main_fragment, HomeFragment())
             }
         }
     }
 
     override fun onOperationItemSelected() {
 
+        appBarTitle = operation.toString()
+        Log.d(TAG, appBarTitle)
+        supportActionBar?.title = operation.toString()//appBarTitle
         inMainFragment = false
-        if (viewModel.isPortrait) {
+        if (isPortrait) {
             supportFragmentManager.commit {
                 replace(R.id.main_fragment, inputFragment)
                 addToBackStack(null)
@@ -184,13 +192,11 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
                 replace(R.id.input_fragment, inputFragment)
             }
         }
-        appBarTitle = viewModel.operation.toString()
-        supportActionBar?.title = appBarTitle
     }
 
     private fun showBackButton() {
-            showOperationsView = viewModel.isPortrait
-            Log.d(TAG, viewModel.isPortrait.toString())
+            showOperationsView = isPortrait
+            Log.d(TAG, isPortrait.toString())
             supportActionBar?.setDisplayHomeAsUpEnabled(showOperationsView)
     }
 
@@ -198,7 +204,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
 
         val inp1 = viewModel.data1
         val inp2 = viewModel.data2
-        val res = when (viewModel.operation) {
+        val res = when (operation) {
             ADD -> inp1 + inp2
             SUBTRACT -> inp1 - inp2
             MULTIPLY -> inp1 * inp2
@@ -207,7 +213,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
         }
         viewModel.result = "Result is ${findWhole(res)}\n" +
                 "for inputs ${findWhole(inp1)} and ${findWhole(inp2)}\n" +
-                "for operation - ${viewModel.operation}"
+                "for operation - ${operation}"
         resultTextView.text = viewModel.result
     }
 

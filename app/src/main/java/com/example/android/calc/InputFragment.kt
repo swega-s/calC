@@ -43,9 +43,9 @@ class InputFragment : Fragment() {
     @SuppressLint("RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        viewModel.isPortrait =
+        MainActivity.isPortrait =
             resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE
-        viewModel.operation?.apply {
+        MainActivity.operation?.apply {
             setViewAndChildrenEnabled(view, true)
             opButton.text = this.toString()
         } ?: run {
@@ -57,7 +57,7 @@ class InputFragment : Fragment() {
 
         opButton.setOnClickListener {
 
-            if (viewModel.operation == null) {
+            if (MainActivity.operation == null) {
                 input1.text.clear()
                 input2.text.clear()
                 return@setOnClickListener
@@ -79,7 +79,7 @@ class InputFragment : Fragment() {
                 viewModel.resultFlag = true
                 input1.text.clear()
                 input2.text.clear()
-                if (viewModel.isPortrait)
+                if (MainActivity.isPortrait)
                     parentFragmentManager.popBackStackImmediate()
             } catch (exception: Exception) {
                 input1.text.clear()
@@ -88,13 +88,13 @@ class InputFragment : Fragment() {
                 return@setOnClickListener
             }
             listener.onResultButtonSelected()
-            if (!viewModel.isPortrait) {
+            if (!MainActivity.isPortrait) {
                 MainActivity.inputFragment.setViewAndChildrenEnabled(view, false)
             }
         }
     }
 
-    private fun setViewAndChildrenEnabled(view: View, enabled: Boolean) {
+    internal fun setViewAndChildrenEnabled(view: View, enabled: Boolean) {
         view.isEnabled = enabled
         if (view is ViewGroup) {
             for (i in 0 until view.childCount) {
@@ -102,5 +102,30 @@ class InputFragment : Fragment() {
                 setViewAndChildrenEnabled(child, enabled)
             }
         }
+    }
+
+    override fun onDestroy() {
+        Log.d(TAG, "onDestroy")
+        super.onDestroy()
+    }
+
+    override fun onStop() {
+        Log.d(TAG, "onStop")
+        super.onStop()
+    }
+
+    override fun onPause() {
+        Log.d(TAG, "onPause")
+        super.onPause()
+    }
+
+    override fun onDestroyView() {
+        Log.d(TAG, "onDestroyView")
+        super.onDestroyView()
+    }
+
+    override fun onDetach() {
+        Log.d(TAG, "onDetach")
+        super.onDetach()
     }
 }
