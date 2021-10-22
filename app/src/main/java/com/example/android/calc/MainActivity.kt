@@ -4,12 +4,10 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
-import androidx.core.view.isVisible
 import androidx.fragment.app.commit
 import com.example.android.calc.Operations.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -17,13 +15,12 @@ import kotlinx.android.synthetic.main.fragment_input.*
 import java.lang.Math.floor
 
 class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
-            InputFragment.OnResButtonClickListener {
+    InputFragment.OnResButtonClickListener {
 
     private val viewModel: InputViewModel by viewModels()
     private var inMainFragment = true
     private var showOperationsView = true
     private lateinit var appBarTitle: String
-    private val TAG = "MainActivity"
 
     companion object {
         var homeFragment = HomeFragment()
@@ -34,13 +31,11 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d(TAG, "on create")
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            Log.d(TAG, "helelo")
             supportFragmentManager.commit {
                 replace(R.id.main_fragment, homeFragment)
             }
@@ -60,20 +55,17 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
     }
 
     override fun onStart() {
-        Log.d(TAG, "onstart")
         isPortrait =
             resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE
         super.onStart()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        Log.d(TAG, "onRestoreInstanceState")
         inMainFragment = savedInstanceState.getBoolean("main_fragment_check")
         showOperationsView = savedInstanceState.getBoolean("op_view")
         appBarTitle = savedInstanceState.getString("action_bar_title", getString(R.string.app_name))
 
         supportActionBar?.title = appBarTitle
-        Log.d(TAG, "restore $appBarTitle")
 
         if (!inMainFragment && isPortrait) {
             supportFragmentManager.commit {
@@ -87,7 +79,6 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        Log.d(TAG, "onSaveInstanceState")
         outState.putBoolean("main_fragment_check", inMainFragment)
         outState.putBoolean("op_view", showOperationsView)
         outState.putString("action_bar_title", appBarTitle)
@@ -95,9 +86,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
     }
 
     override fun onBackPressed() {
-        Log.d(TAG, "onBackPressed")
         if (supportFragmentManager.backStackEntryCount != 0) {
-            Log.d(TAG, "hoho1")
             appBarTitle = getString(R.string.app_name)
             supportActionBar?.title = appBarTitle
             input1.text.clear()
@@ -113,39 +102,19 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
             supportActionBar?.title = getString(R.string.app_name)
             if (viewModel.resultFlag) {
                 val view = findViewById<Button>(R.id.addButton)
-                Log.d(TAG, view.isVisible.toString())
-                Log.d(TAG, "hoho2")
                 showOptionViews()
-                Log.d(TAG, view.isVisible.toString())
                 supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 viewModel.resultFlag = false
             } else {
-                Log.d(TAG, "hoho3")
                 finish()
             }
         }
     }
 
-    override fun onPause() {
-        Log.d(TAG, "onPause")
-        super.onPause()
-    }
-
-    override fun onStop() {
-        Log.d(TAG, "onStop")
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        Log.d(TAG, "onDestroy")
-        super.onDestroy()
-    }
-
-    override fun finish() {
-        Log.d(TAG, "finish")
-        supportActionBar?.title = getString(R.string.app_name)
-        super.finish()
-    }
+//    override fun finish() {
+//        supportActionBar?.title = getString(R.string.app_name)
+//        super.finish()
+//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -177,7 +146,6 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
     override fun onOperationItemSelected() {
 
         appBarTitle = operation.toString()
-        Log.d(TAG, appBarTitle)
         supportActionBar?.title = operation.toString()//appBarTitle
         inMainFragment = false
         if (isPortrait) {
@@ -195,9 +163,8 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnItemSelectedListener,
     }
 
     private fun showBackButton() {
-            showOperationsView = isPortrait
-            Log.d(TAG, isPortrait.toString())
-            supportActionBar?.setDisplayHomeAsUpEnabled(showOperationsView)
+        showOperationsView = isPortrait
+        supportActionBar?.setDisplayHomeAsUpEnabled(showOperationsView)
     }
 
     private fun performOperationForResult() {

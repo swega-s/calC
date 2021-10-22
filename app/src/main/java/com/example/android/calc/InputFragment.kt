@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
@@ -18,14 +17,12 @@ class InputFragment : Fragment() {
 
     private val viewModel: InputViewModel by activityViewModels()
     private lateinit var listener: OnResButtonClickListener
-    private val TAG = "MainActivityInputFrag"
 
     interface OnResButtonClickListener {
         fun onResultButtonSelected()
     }
 
     override fun onAttach(context: Context) {
-        Log.d(TAG, "onattach")
         if (context is OnResButtonClickListener) {
             listener = context
         }
@@ -102,30 +99,5 @@ class InputFragment : Fragment() {
                 setViewAndChildrenEnabled(child, enabled)
             }
         }
-    }
-
-    override fun onDestroy() {
-        Log.d(TAG, "onDestroy")
-        super.onDestroy()
-    }
-
-    override fun onStop() {
-        Log.d(TAG, "onStop")
-        super.onStop()
-    }
-
-    override fun onPause() {
-        Log.d(TAG, "onPause")
-        super.onPause()
-    }
-
-    override fun onDestroyView() {
-        Log.d(TAG, "onDestroyView")
-        super.onDestroyView()
-    }
-
-    override fun onDetach() {
-        Log.d(TAG, "onDetach")
-        super.onDetach()
     }
 }
