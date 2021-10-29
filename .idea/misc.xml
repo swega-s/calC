@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Swega/AndroidStudioProjects/MyCalc/app/src/main/res/layout-land/activity_main.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/Swega/AndroidStudioProjects/MyCalc/app/src/main/res/layout-land/fragment_main.xml" value="0.14417989417989419" />
+        <entry key="..\:/Users/Swega/AndroidStudioProjects/MyCalc/app/src/main/res/layout/activity_main.xml" value="0.12295081967213115" />
+        <entry key="..\:/Users/Swega/AndroidStudioProjects/MyCalc/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Swega/AndroidStudioProjects/MyCalc/app/src/main/res/layout/fragment_input.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Swega/AndroidStudioProjects/MyCalc/app/src/main/res/layout/fragment_portrait.xml" value="0.12916666666666668" />
+        <entry key="..\:/Users/Swega/AndroidStudioProjects/MyCalc/app/src/main/res/layout/motion.xml" value="0.14583333333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

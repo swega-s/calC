@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:id="@+id/home_frag_layout">
+
+    <LinearLayout
+        android:id="@+id/home_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_700"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:backgroundTint="#E30B1C"
+            android:text="@string/add" />
+
+        <Button
+            android:id="@+id/subButton"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:backgroundTint="#16A618"
+            android:text="@string/subtract" />
+
+        <Button
+            android:id="@+id/multiplyButton"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:backgroundTint="#F3DC18"
+            android:text="@string/multiply" />
+
+        <Button
+            android:id="@+id/divideButton"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:backgroundTint="#2196F3"
+            android:text="@string/divide" />
+
+        <TextView
+            android:id="@+id/resultTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reset"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</ScrollView>

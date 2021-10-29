@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btn_width">150dp</dimen>
+    <dimen name="btn_height">60dp</dimen>
+    <dimen name="tv_width">300dp</dimen>
+    <dimen name="et_width">160dp</dimen>
+</resources>
